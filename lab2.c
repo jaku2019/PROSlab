@@ -1,22 +1,22 @@
 //TODO zapetlenie rysowania tablicy, licznik ruchow, WYKRYWANIE zapelnienia tablicy x-ami
 #include <stdio.h>
 //#include "/home/mion/s/65/jtatarsk/Documents/PROS/lib/polibudex.h"
-char macierzLiczb[9][9]={
-    { 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o' },
-    { 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o' },
-    { 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o' },
-    { 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o' },
-    { 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o' },
-    { 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o' },
-    { 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o' },
-    { 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o' },
-    { 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o' },
+int macierzLiczb[9][9]={
+    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     };
 int wierszWej;
 int kolumnaWej;
 void rysujPlansze();
 int sprawdzWejscie();
-char zmienZnakMac();
+int zmienZnakMac();
 void znakISasiedzi();
 int main(void){
     rysujPlansze();    
@@ -65,12 +65,12 @@ int sprawdzWejscie(){
     return wierszWej, kolumnaWej;  
 };
 //zamiana znaku w macierzLiczb na przeciwny
-char zmienZnakMac(int wierszMac, int kolumnaMac){
-    if (macierzLiczb[wierszMac][kolumnaMac] == 'o'){
-        macierzLiczb[wierszMac][kolumnaMac] = 'X';
+int zmienZnakMac(int wierszMac, int kolumnaMac){
+    if (macierzLiczb[wierszMac][kolumnaMac] == 0){
+        macierzLiczb[wierszMac][kolumnaMac] = 1;
     }
     else{
-        macierzLiczb[wierszMac][kolumnaMac] = 'o';
+        macierzLiczb[wierszMac][kolumnaMac] = 0;
     }
 };
 // zamiana znaku i jego sasiadów w macierzLiczb
