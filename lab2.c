@@ -39,7 +39,12 @@ void rysujPlansze(){
     for(int m=0; m<9; m++){
         printf("%d.", m + 1);
         for(int n=0; n<9; n++){
-            printf("%d.", macierzLiczb[m][n]);
+            if(macierzLiczb[m][n] == 0){
+            printf("o.");
+            }
+            else{
+            printf("X.");
+            }
         };
     printf("\n....................\n");
     }
