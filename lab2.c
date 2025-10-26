@@ -1,4 +1,3 @@
-//TODO zapetlenie rysowania tablicy, licznik ruchow, WYKRYWANIE zapelnienia tablicy x-ami
 #include <stdio.h>
 //#include "/home/mion/s/65/jtatarsk/Documents/PROS/lib/polibudex.h"
 int macierzLiczb[9][9]={
@@ -14,17 +13,26 @@ int macierzLiczb[9][9]={
     };
 int wierszWej;
 int kolumnaWej;
+int licznik = -2;
 void rysujPlansze();
 int sprawdzWejscie();
 int zmienZnakMac();
 void znakISasiedzi();
+int licz();
 int main(void){
-    rysujPlansze();    
-    // wybor wiersza i kolumny ze sprawdzeniem poprawnosci
-    sprawdzWejscie();
-    // zmiana wybranego znaku i jego sasiadow na przeciwne
-    znakISasiedzi(wierszWej - 1, kolumnaWej - 1);
+    do{
+        rysujPlansze();    
+        // wybor wiersza i kolumny ze sprawdzeniem poprawnosci
+        sprawdzWejscie();
+        // zmiana wybranego znaku i jego sasiadow na przeciwne
+        znakISasiedzi(wierszWej - 1, kolumnaWej - 1);
+        licznik++;
+        licz;
+    }
+    while(licznik >= 0);
     rysujPlansze();
+    printf("Liczba ruchow: %d\n", licznik);
+    printf("GRATULACJE - WYGRANA!!!\n");
     return 0;
 };
 void rysujPlansze(){
@@ -51,7 +59,7 @@ void rysujPlansze(){
 };
 //pryjęcie nr. wiersza i kolumny, przerwanie gdy spoza zakresu
 int sprawdzWejscie(){
-    printf("Liczba ruchow: \n");
+    printf("Liczba ruchow: %d\n", licznik);
     printf("Podaj nr wiersza (1-9): ");
     scanf("%d", &wierszWej);
     if(wierszWej < 1 || wierszWej > 9){
@@ -92,5 +100,17 @@ void znakISasiedzi(int w, int k){
     };
     if(k < 9){
         zmienZnakMac(w, k - 1);
+    };
+};
+int licz(){
+    int suma = 0;
+    for(int m=0; m<9; m++){
+        for(int n=0; n<9; n++){
+            suma += macierzLiczb[m][n];
+        };
+    };
+    if(suma == 81){
+        licznik = -1;
+        printf("\n GRATULACJE! \n");
     };
 }
