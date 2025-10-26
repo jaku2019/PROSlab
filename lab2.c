@@ -13,7 +13,7 @@ int macierzLiczb[9][9]={
     };
 int wierszWej;
 int kolumnaWej;
-int licznik = -2;
+int licznik = 0;
 void rysujPlansze();
 int sprawdzWejscie();
 int zmienZnakMac();
@@ -62,14 +62,16 @@ int sprawdzWejscie(){
     printf("Liczba ruchow: %d\n", licznik);
     printf("Podaj nr wiersza (1-9): ");
     scanf("%d", &wierszWej);
-    if(wierszWej < 1 || wierszWej > 9){
+    if(wierszWej < 1 && wierszWej > 9){
         printf("Podano bledny nr wiersza! Sprobuj od nowa.\n");
+        licznik = -1;
     }
     else {
     printf("Podaj nr kolumny (1-9): ");
     scanf("%d", &kolumnaWej);
-        if(wierszWej < 1 || wierszWej > 9){
+        if(wierszWej < 1 && wierszWej > 9){
             printf("Podano bledny nr wiersza! Sprobuj od nowa.\n");
+            licznik = -1;
         }
         else {
             printf("\nWybrano wiersz %d i kolumne %d\n\n", wierszWej, kolumnaWej);
@@ -89,19 +91,20 @@ int zmienZnakMac(int wierszMac, int kolumnaMac){
 // zamiana znaku i jego sasiadów w macierzLiczb
 void znakISasiedzi(int w, int k){
     zmienZnakMac(w, k);
-    if(w > 1){
+    if(w >= 0 && w < 8){
         zmienZnakMac(w + 1, k);
     };
-    if(w < 9){
+    if(w <= 8 && w > 0){
         zmienZnakMac(w - 1, k);
     };
-    if(k > 1){
+    if(k >= 0 && k < 8){
         zmienZnakMac(w, k + 1);
     };
-    if(k < 9){
+    if(k <= 8 && k > 0){
         zmienZnakMac(w, k - 1);
     };
 };
+// liczy sume elementow macierzLiczb, gdy same x-y ustawia licznik na -1
 int licz(){
     int suma = 0;
     for(int m=0; m<9; m++){
@@ -111,6 +114,5 @@ int licz(){
     };
     if(suma == 81){
         licznik = -1;
-        printf("\n GRATULACJE! \n");
     };
 }
