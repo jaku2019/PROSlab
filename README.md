@@ -2,7 +2,7 @@
 Program uruchamia w pętli main kolejne funkcje. Poniżej przedstawiono występujące w programie zmienne i funkcje.
 
 ## Zmienne globalne
-- `int macierzLiczb[9][9]` – plansza gry ( rysujPlansze `0` → drukuje „o.”, `1` → „X.”).
+- `int macierzLiczb[9][9]` – plansza gry z domyślnymi wartościami 0( rysujPlansze `0` → drukuje „o.”, `1` → „X.”).
 - `int wierszWej` – wybrany przez użytkownika numer wiersza (`1–9`).
 - `int kolumnaWej` – wybrany przez użytkownika numer kolumny (`1–9`).
 - `int licznik = 0` – liczba wykonanych ruchów; ustawienie `-1` kończy pętlę gry.
