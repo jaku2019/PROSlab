@@ -66,14 +66,14 @@ int sprawdzWejscie(void){
     printf("Podaj nr wiersza (1-9): ");
     scanf("%d", &tmpWierszWej);
     if (tmpWierszWej < 1 || tmpWierszWej > 9) {
-        printf("Podano bledny nr wiersza! Sprobuj od nowa.\n");
+        printf("Podano bledny nr wiersza! Sprobuj ponownie.\n");
         return 0;
     }
 
     printf("Podaj nr kolumny (1-9): ");
     scanf("%d", &tmpKolumnaWej);
     if (tmpKolumnaWej < 1 || tmpKolumnaWej > 9) {
-        printf("Podano bledny nr kolumny! Sprobuj od nowa.\n");
+        printf("Podano bledny nr kolumny! Sprobuj ponownie.\n");
         return 0;
     }
 
