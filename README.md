@@ -12,18 +12,18 @@ Program uruchamia w pętli main kolejne funkcje. Poniżej przedstawiono występu
 ### `void rysujPlansze(void)`
 Rysuje planszę:
 - nagłówki kolumn `1–9` oraz linię ramki,
-- dla każdego wiersza: numer wiersza i zawartość pól (`o.` dla `0`, `X.` dla `1`), po każdym wierszu kropkowana "ramka". 
+- dla każdego wiersza: numer wiersza i zawartość pól (`o.` dla `0`, `X.` dla `1`), po każdym wierszu kropkowana "ramka".  
 **Parametry / zwraca:** brak.
 
 ### `int sprawdzWejscie(void)`
 Pobiera ruch użytkownika **z weryfikacją zakresu**:
 - czyta do zmiennych "chwilowych" `tmpWierszWej`, `tmpKolumnaWej`,
 - jeśli wartości są w `1–9` → przepisuje do zmiennych globalnych `wierszWej`, `kolumnaWej`, wypisuje potwierdzenie i zwraca `1` - OK,
-- jeśli poza zakresem → wypisuje komunikat i zwraca `0` - błąd. 
+- jeśli poza zakresem → wypisuje komunikat i zwraca `0` - błąd.  
 **Parametry:** brak. **Zwraca:** `1` (OK) / `0` (błąd).
 
 ### `void zmienZnakMac(int wierszMac, int kolumnaMac)`
-Odwraca stan pojedynczego pola tablicy: `0 → 1`, `1 → 0`.  
+Odwraca stan pojedynczego pola tablicy: `0 → 1`, `1 → 0`.   
 **Parametry:** indeksy `0–8`. **Zwraca:** brak.
 
 ### `void znakISasiedzi(int w, int k)`
