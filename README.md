@@ -34,5 +34,5 @@ Odwraca wybrane pole `(w, k)` oraz sąsiadów, **tylko jeśli mieszczą się w p
 Sumuje wszystkie elementy `macierzLiczb`. Jeśli suma = `81` (same jedynki), ustawia `licznik = -1` → zakończenie gry (wygrana).  
 **Parametry / zwraca:** brak.
 
-# pętla main()
+## pętla main()
 Pętla `main` uruchamia pętlę `do…while`, w której najpierw rysuje planszę, a potem pobiera ruch; jeśli `sprawdzWejscie()` zwróci błąd, pomija ruch i iterację. Przy poprawnym wejściu odwraca wskazane pole i jego sąsiadów (`znakISasiedzi`), zwiększa licznik ruchów i sprawdza zwycięstwo funkcją `licz()`. Pętla trwa, dopóki licznik nie zostanie ustawiony na -1 (wygrana). Po wyjściu program rysuje planszę końcową, wypisuje liczbę ruchów i komunikat o wygranej.
