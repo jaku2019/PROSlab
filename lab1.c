@@ -16,18 +16,18 @@ int kolumnaWej;
 int licznik = 0;
 void rysujPlansze();
 int sprawdzWejscie();
-int zmienZnakMac();
+void zmienZnakMac();
 void znakISasiedzi();
-int licz();
+void licz();
 int main(void){
     do{
         rysujPlansze();    
         // wybor wiersza i kolumny ze sprawdzeniem poprawnosci
-        sprawdzWejscie();
+        if (!sprawdzWejscie()) continue;          // zły zakres → pomiń ruch
         // zmiana wybranego znaku i jego sasiadow na przeciwne
         znakISasiedzi(wierszWej - 1, kolumnaWej - 1);
         licznik++;
-        licz;
+        licz();
     }
     while(licznik >= 0);
     rysujPlansze();
@@ -58,29 +58,34 @@ void rysujPlansze(){
     }
 };
 //pryjęcie nr. wiersza i kolumny, przerwanie gdy spoza zakresu
-int sprawdzWejscie(){
+int sprawdzWejscie(void){
+    int tmpWierszWej, tmpKolumnaWej;
+
     printf("Liczba ruchow: %d\n", licznik);
+
     printf("Podaj nr wiersza (1-9): ");
-    scanf("%d", &wierszWej);
-    if(wierszWej < 1 && wierszWej > 9){
+    scanf("%d", &tmpWierszWej);
+    if (tmpWierszWej < 1 || tmpWierszWej > 9) {
         printf("Podano bledny nr wiersza! Sprobuj od nowa.\n");
-        licznik = -1;
+        return 0;
     }
-    else {
+
     printf("Podaj nr kolumny (1-9): ");
-    scanf("%d", &kolumnaWej);
-        if(wierszWej < 1 && wierszWej > 9){
-            printf("Podano bledny nr wiersza! Sprobuj od nowa.\n");
-            licznik = -1;
-        }
-        else {
-            printf("\nWybrano wiersz %d i kolumne %d\n\n", wierszWej, kolumnaWej);
-        };
-    };
-    return wierszWej, kolumnaWej;  
+    scanf("%d", &tmpKolumnaWej);
+    if (tmpKolumnaWej < 1 || tmpKolumnaWej > 9) {
+        printf("Podano bledny nr kolumny! Sprobuj od nowa.\n");
+        return 0;
+    }
+
+    // dopiero teraz zapis do globalnych
+    wierszWej  = tmpWierszWej;
+    kolumnaWej = tmpKolumnaWej;
+
+    printf("\nWybrano wiersz %d i kolumne %d\n\n", wierszWej, kolumnaWej);
+    return 1;
 };
 //zamiana znaku w macierzLiczb na przeciwny
-int zmienZnakMac(int wierszMac, int kolumnaMac){
+void zmienZnakMac(int wierszMac, int kolumnaMac){
     if (macierzLiczb[wierszMac][kolumnaMac] == 0){
         macierzLiczb[wierszMac][kolumnaMac] = 1;
     }
@@ -105,7 +110,7 @@ void znakISasiedzi(int w, int k){
     };
 };
 // liczy sume elementow macierzLiczb, gdy same x-y ustawia licznik na -1
-int licz(){
+void licz(){
     int suma = 0;
     for(int m=0; m<9; m++){
         for(int n=0; n<9; n++){
