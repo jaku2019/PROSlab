@@ -12,7 +12,7 @@ Program uruchamia w pętli main kolejne funkcje. Poniżej przedstawiono występu
 ### `void rysujPlansze(void)`
 Rysuje planszę:
 - nagłówki kolumn `1–9` oraz linię ramki,
-- dla każdego wiersza: numer wiersza i zawartość pól (`o.` dla `0`, `X.` dla `1`), po każdym wierszu kropkowana "ramka". 
+- dla każdego wiersza: numer wiersza i zawartość pól (`o.` dla `0`, `X.` dla `1`), po każdym wierszu kropkowana "ramka".
 **Parametry / zwraca:** brak.
 
 ### `int sprawdzWejscie(void)`
