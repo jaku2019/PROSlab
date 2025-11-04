@@ -23,7 +23,7 @@ int main(void){
     do{
         rysujPlansze();    
         // wybor wiersza i kolumny ze sprawdzeniem poprawnosci
-        if (!sprawdzWejscie()) continue;          // zły zakres → pomiń ruch
+        if (!sprawdzWejscie()) continue;          // zły zakres pomiń ruch
         // zmiana wybranego znaku i jego sasiadow na przeciwne
         znakISasiedzi(wierszWej - 1, kolumnaWej - 1);
         licznik++;
