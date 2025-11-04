@@ -13,7 +13,7 @@ Program uruchamia w pętli main kolejne funkcje. Poniżej przedstawiono występu
 Rysuje planszę:
 - nagłówki kolumn `1–9` oraz linię ramki,
 - dla każdego wiersza: numer wiersza i zawartość pól (`o.` dla `0`, `X.` dla `1`), po każdym wierszu kropkowana "ramka". 
-**Parametry / zwrot:** brak.
+**Parametry / zwraca:** brak.
 
 ### `int sprawdzWejscie(void)`
 Pobiera ruch użytkownika **z weryfikacją zakresu**:
@@ -32,4 +32,4 @@ Odwraca wybrane pole `(w, k)` oraz sąsiadów, **tylko jeśli mieszczą się w p
 
 ### `void licz(void)`
 Sumuje wszystkie elementy `macierzLiczb`. Jeśli suma = `81` (same jedynki), ustawia `licznik = -1` → zakończenie gry (wygrana).  
-**Parametry / zwrot:** brak.
+**Parametry / zwraca:** brak.
