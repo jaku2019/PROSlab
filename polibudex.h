@@ -10,6 +10,6 @@ void checkWin();
 extern int board[9][9];
 extern int inputRow;
 extern int inputCol;
-extern int movesCount = 0;
+extern int movesCount;
 
 #endif

@@ -1,3 +1,8 @@
+#ifndef
+include <stdio.h>
+#endif
+#include "polibudex.h"
+
 int board[9][9]={
     { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
