@@ -1,6 +1,6 @@
 #include <stdio.h>
 //#include "/home/mion/s/65/jtatarsk/Documents/PROS/lib/polibudex.h"
-int macierzLiczb[9][9]={
+int board[9][9]={
     { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -11,31 +11,31 @@ int macierzLiczb[9][9]={
     { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     };
-int wierszWej;
-int kolumnaWej;
-int licznik = 0;
-void rysujPlansze();
-int sprawdzWejscie();
-void zmienZnakMac();
-void znakISasiedzi();
-void licz();
+int inputRow;
+int inputCol;
+int movesCount = 0;
+void drawBoard();
+int checkInput();
+void toggleCell(int row, int col);
+void toggleCellAndNeighbors(int w, int k);
+void checkWin();
 int main(void){
     do{
-        rysujPlansze();    
+    drawBoard();    
         // wybor wiersza i kolumny ze sprawdzeniem poprawnosci
-        if (!sprawdzWejscie()) continue;          // zły zakres pomiń ruch
+    if (!checkInput()) continue;          // zły zakres pomiń ruch
         // zmiana wybranego znaku i jego sasiadow na przeciwne
-        znakISasiedzi(wierszWej - 1, kolumnaWej - 1);
-        licznik++;
-        licz();
+    toggleCellAndNeighbors(inputRow - 1, inputCol - 1);
+        movesCount++;
+    checkWin();
     }
-    while(licznik >= 0);
-    rysujPlansze();
-    printf("Liczba ruchow: %d\n", licznik);
+    while(movesCount >= 0);
+    drawBoard();
+    printf("Liczba ruchow: %d\n", movesCount);
     printf("GRATULACJE - WYGRANA!!!\n");
     return 0;
 };
-void rysujPlansze(){
+void drawBoard(){
     // lp. kolumn i ramka
     printf("  ");
     for(int n=0; n<9; n++){
@@ -47,7 +47,7 @@ void rysujPlansze(){
     for(int m=0; m<9; m++){
         printf("%d.", m + 1);
         for(int n=0; n<9; n++){
-            if(macierzLiczb[m][n] == 0){
+            if(board[m][n] == 0){
             printf("o.");
             }
             else{
@@ -58,66 +58,66 @@ void rysujPlansze(){
     }
 };
 //pryjęcie nr. wiersza i kolumny, przerwanie gdy spoza zakresu
-int sprawdzWejscie(void){
-    int tmpWierszWej, tmpKolumnaWej;
+int checkInput(void){
+    int tmpInputRow, tmpInputCol;
 
-    printf("Liczba ruchow: %d\n", licznik);
+    printf("Liczba ruchow: %d\n", movesCount);
 
     printf("Podaj nr wiersza (1-9): ");
-    scanf("%d", &tmpWierszWej);
-    if (tmpWierszWej < 1 || tmpWierszWej > 9) {
+    scanf("%d", &tmpInputRow);
+    if (tmpInputRow < 1 || tmpInputRow > 9) {
         printf("Podano bledny nr wiersza! Sprobuj ponownie.\n");
         return 0;
     }
 
     printf("Podaj nr kolumny (1-9): ");
-    scanf("%d", &tmpKolumnaWej);
-    if (tmpKolumnaWej < 1 || tmpKolumnaWej > 9) {
+    scanf("%d", &tmpInputCol);
+    if (tmpInputCol < 1 || tmpInputCol > 9) {
         printf("Podano bledny nr kolumny! Sprobuj ponownie.\n");
         return 0;
     }
 
     // dopiero teraz zapis do globalnych
-    wierszWej  = tmpWierszWej;
-    kolumnaWej = tmpKolumnaWej;
+    inputRow  = tmpInputRow;
+    inputCol = tmpInputCol;
 
-    printf("\nWybrano wiersz %d i kolumne %d\n\n", wierszWej, kolumnaWej);
+    printf("\nWybrano wiersz %d i kolumne %d\n\n", inputRow, inputCol);
     return 1;
 };
 //zamiana znaku w macierzLiczb na przeciwny
-void zmienZnakMac(int wierszMac, int kolumnaMac){
-    if (macierzLiczb[wierszMac][kolumnaMac] == 0){
-        macierzLiczb[wierszMac][kolumnaMac] = 1;
+void toggleCell(int row, int col){
+    if (board[row][col] == 0){
+        board[row][col] = 1;
     }
     else{
-        macierzLiczb[wierszMac][kolumnaMac] = 0;
+        board[row][col] = 0;
     }
 };
 // zamiana znaku i jego sasiadów w macierzLiczb
-void znakISasiedzi(int w, int k){
-    zmienZnakMac(w, k);
+void toggleCellAndNeighbors(int w, int k){
+    toggleCell(w, k);
     if(w >= 0 && w < 8){
-        zmienZnakMac(w + 1, k);
+        toggleCell(w + 1, k);
     };
     if(w <= 8 && w > 0){
-        zmienZnakMac(w - 1, k);
+        toggleCell(w - 1, k);
     };
     if(k >= 0 && k < 8){
-        zmienZnakMac(w, k + 1);
+        toggleCell(w, k + 1);
     };
     if(k <= 8 && k > 0){
-        zmienZnakMac(w, k - 1);
+        toggleCell(w, k - 1);
     };
 };
 // liczy sume elementow macierzLiczb, gdy same x-y ustawia licznik na -1
-void licz(){
+void checkWin(){
     int suma = 0;
     for(int m=0; m<9; m++){
         for(int n=0; n<9; n++){
-            suma += macierzLiczb[m][n];
+            suma += board[m][n];
         };
     };
     if(suma == 81){
-        licznik = -1;
+        movesCount = -1;
     };
 }
