@@ -1,23 +1,7 @@
-#ifndef
-include <stdio.h>
-#endif
+#include <stdio.h>
 #include "polibudex.h"
 
-int board[9][9]={
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    };
-int inputRow;
-int inputCol;
-int movesCount = 0;
-void drawBoard(){
+void drawBoard(int (*board)[9]){
     // lp. kolumn i ramka
     printf("  ");
     for(int n=0; n<9; n++){
@@ -40,7 +24,7 @@ void drawBoard(){
     }
 };
 //pryjęcie nr. wiersza i kolumny, przerwanie gdy spoza zakresu
-int checkInput(void){
+int checkInput(int *movesCount, int *inputRow, int *inputCol){
     int tmpInputRow, tmpInputCol;
 
     printf("Liczba ruchow: %d\n", movesCount);
@@ -60,14 +44,14 @@ int checkInput(void){
     }
 
     // dopiero teraz zapis do globalnych
-    inputRow  = tmpInputRow;
-    inputCol = tmpInputCol;
+    *inputRow  = tmpInputRow;
+    *inputCol = tmpInputCol;
 
-    printf("\nWybrano wiersz %d i kolumne %d\n\n", inputRow, inputCol);
+    printf("\nWybrano wiersz %d i kolumne %d\n\n", tmpInputRow, tmpInputCol);
     return 1;
 };
 //zamiana znaku w macierzLiczb na przeciwny
-void toggleCell(int row, int col){
+void toggleCell(int (*board)[9], int row, int col){
     if (board[row][col] == 0){
         board[row][col] = 1;
     }
@@ -76,23 +60,23 @@ void toggleCell(int row, int col){
     }
 };
 // zamiana znaku i jego sasiadów w macierzLiczb
-void toggleCellAndNeighbors(int w, int k){
-    toggleCell(w, k);
+void toggleCellAndNeighbors(int (*board)[9], int w, int k){
+    toggleCell(board, w, k);
     if(w >= 0 && w < 8){
-        toggleCell(w + 1, k);
+        toggleCell(board, w + 1, k);
     };
     if(w <= 8 && w > 0){
-        toggleCell(w - 1, k);
+        toggleCell(board, w - 1, k);
     };
     if(k >= 0 && k < 8){
-        toggleCell(w, k + 1);
+        toggleCell(board, w, k + 1);
     };
     if(k <= 8 && k > 0){
-        toggleCell(w, k - 1);
+        toggleCell(board, w, k - 1);
     };
 };
 // liczy sume elementow macierzLiczb, gdy same x-y ustawia licznik na -1
-void checkWin(){
+void checkWin(int (*board)[9], int *movesCount){
     int suma = 0;
     for(int m=0; m<9; m++){
         for(int n=0; n<9; n++){
@@ -100,6 +84,6 @@ void checkWin(){
         };
     };
     if(suma == 81){
-        movesCount = -1;
+        *movesCount = -1;
     };
 }

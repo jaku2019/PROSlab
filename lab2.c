@@ -3,17 +3,21 @@
 #include "polibudex.h"
 
 int main(void){
+    int board[9][9]={0};
+    int inputRow;
+    int inputCol;
+    int movesCount = 0;
     do{
-    drawBoard();    
+    drawBoard(board);    
         // wybor wiersza i kolumny ze sprawdzeniem poprawnosci
-    if (!checkInput()) continue;          // zły zakres pomiń ruch
+    if (!checkInput(&movesCount, &inputRow, &inputCol)) continue;          // zły zakres pomiń ruch
         // zmiana wybranego znaku i jego sasiadow na przeciwne
-    toggleCellAndNeighbors(inputRow - 1, inputCol - 1);
+    toggleCellAndNeighbors(board, inputRow - 1, inputCol - 1);
         movesCount++;
-    checkWin();
+    checkWin(board, &movesCount);
     }
-    while(movesCount >= 0);
-    drawBoard();
+    while(&movesCount >= 0);
+    drawBoard(board);
     printf("Liczba ruchow: %d\n", movesCount);
     printf("GRATULACJE - WYGRANA!!!\n");
     return 0;
