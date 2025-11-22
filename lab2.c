@@ -16,7 +16,7 @@ int main(void){
         movesCount++;
     checkWin(board, &movesCount);
     }
-    while(&movesCount >= 0);
+    while(movesCount >= 0);
     drawBoard(board);
     printf("Liczba ruchow: %d\n", movesCount);
     printf("GRATULACJE - WYGRANA!!!\n");

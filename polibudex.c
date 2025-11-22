@@ -27,7 +27,7 @@ void drawBoard(int (*board)[9]){
 int checkInput(int *movesCount, int *inputRow, int *inputCol){
     int tmpInputRow, tmpInputCol;
 
-    printf("Liczba ruchow: %d\n", movesCount);
+    printf("Liczba ruchow: %d\n", *movesCount);
 
     printf("Podaj nr wiersza (1-9): ");
     scanf("%d", &tmpInputRow);
