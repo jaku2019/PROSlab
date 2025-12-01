@@ -2,30 +2,37 @@
 #include "polibudex.h"
 #define MAX_MOVES 5
 
-void drawBoard(int board[9][9]){
+void drawBoard(int board[9][9], FILE *logFile){
     // lp. kolumn i ramka
     printf("  ");
+    fprintf(logFile, "  ");
     for(int n=0; n<9; n++){
         printf("%d ", n+1);
+        fprintf(logFile, "%d ", n+1);
     };
     printf("\n....................\n");
+    fprintf(logFile, "\n....................\n");
 
     // wypisanie zawartosci macierzy i lp. wierszy
     for(int m=0; m<9; m++){
         printf("%d.", m + 1);
+        fprintf(logFile, "%d.", m + 1);
         for(int n=0; n<9; n++){
             if(board[m][n] == 0){
             printf("o.");
+            fprintf(logFile, "o.");
             }
             else{
             printf("X.");
+            fprintf(logFile, "X.");
             }
         };
     printf("\n....................\n");
+    fprintf(logFile, "\n....................\n");
     }
 };
 //pryjęcie nr. wiersza i kolumny, przerwanie gdy spoza zakresu
-int checkInput(int *movesCount, int *inputRow, int *inputCol){
+int checkInput(int *movesCount, int *inputRow, int *inputCol, FILE *logFile){
     int tmpInputRow, tmpInputCol;
 
     // max liczba ruchów, przekroczenie kończy grę
@@ -34,20 +41,29 @@ int checkInput(int *movesCount, int *inputRow, int *inputCol){
         *movesCount = -2;
         return 0;
     }
-    printf("Pozostalo ruchow: %d\n", remainingMoves--);
+    printf("Pozostalo ruchow: %d\n", remainingMoves);
+    fprintf(logFile, "Pozostalo ruchow: %d\n", remainingMoves);
+    remainingMoves--;
     printf("Liczba ruchow: %d\n", *movesCount);
+    fprintf(logFile, "Liczba ruchow: %d\n", *movesCount);
 
     printf("Podaj nr wiersza (1-9): ");
+    fprintf(logFile, "Podaj nr wiersza (1-9): ");
     scanf("%d", &tmpInputRow);
+    fscanf(logFile, "%d", &tmpInputRow);
     if (tmpInputRow < 1 || tmpInputRow > 9) {
         printf("Podano bledny nr wiersza! Sprobuj ponownie.\n");
+        fprintf(logFile, "Podano bledny nr wiersza! Sprobuj ponownie.\n");
         return 0;
     }
 
     printf("Podaj nr kolumny (1-9): ");
+    fprintf(logFile, "Podaj nr kolumny (1-9): ");
     scanf("%d", &tmpInputCol);
+    fscanf(logFile, "%d", &tmpInputCol);
     if (tmpInputCol < 1 || tmpInputCol > 9) {
         printf("Podano bledny nr kolumny! Sprobuj ponownie.\n");
+        fprintf(logFile, "Podano bledny nr kolumny! Sprobuj ponownie.\n");
         return 0;
     }
 
@@ -55,6 +71,7 @@ int checkInput(int *movesCount, int *inputRow, int *inputCol){
     *inputCol = tmpInputCol;
 
     printf("\nWybrano wiersz %d i kolumne %d\n\n", tmpInputRow, tmpInputCol);
+    fprintf(logFile, "\nWybrano wiersz %d i kolumne %d\n\n", tmpInputRow, tmpInputCol);
     return 1;
 };
 //zamiana znaku w macierzLiczb na przeciwny

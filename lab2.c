@@ -7,10 +7,12 @@ int main(void){
     int inputRow;
     int inputCol;
     int movesCount = 0;
+    FILE *logFile;
+    logFile = fopen("polibudex_log.txt", "w");
     do{
-    drawBoard(board);    
+    drawBoard(board, logFile);    
         // wybor wiersza i kolumny ze sprawdzeniem poprawnosci
-    if (!checkInput(&movesCount, &inputRow, &inputCol)) continue;          // zły zakres pomiń ruch
+    if (!checkInput(&movesCount, &inputRow, &inputCol, logFile)) continue;          // zły zakres pomiń ruch
         // zmiana wybranego znaku i jego sasiadow na przeciwne
     toggleCellAndNeighbors(board, inputRow - 1, inputCol - 1);
         movesCount++;
@@ -18,14 +20,19 @@ int main(void){
     }
     while(movesCount >= 0);
     if (movesCount == -1) {
-        drawBoard(board);
+        drawBoard(board, logFile);
         printf("Liczba ruchow: %d\n", movesCount);
+        fprintf(logFile, "Liczba ruchow: %d\n", movesCount);
         printf("GRATULACJE - WYGRANA!!!\n");
+        fprintf(logFile, "GRATULACJE - WYGRANA!!!\n");
+        fclose(logFile);
         return 0;
     }
     else if (movesCount == -2)
     {
         printf("Przekroczono maks. liczbe ruchow. KONIEC GRY!\n");
+        fprintf(logFile, "Przekroczono maks. liczbe ruchow. KONIEC GRY!\n");
+        fclose(logFile);
         return 0;
     }
     
