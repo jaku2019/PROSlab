@@ -111,3 +111,27 @@ void checkWin(int board[9][9], int *movesCount){
         *movesCount = -1;
     };
 }
+
+void gameOver(FILE *logFile){
+    printf("Przekroczono maks. liczbe ruchow. KONIEC GRY!\n");
+    fprintf(logFile, "Przekroczono maks. liczbe ruchow. KONIEC GRY!\n");
+    fclose(logFile);
+}
+
+void winnerMessage(int *movesCount, FILE *logFile){
+    printf("Liczba ruchow: %d\n", *movesCount);
+    fprintf(logFile, "Liczba ruchow: %d\n", *movesCount);
+    printf("GRATULACJE - WYGRANA!!!\n");
+    fprintf(logFile, "GRATULACJE - WYGRANA!!!\n");
+    fclose(logFile);
+}
+
+void useArguments(int argc, char *argv[], char *symbolX, char *symbolO){
+    //nadpisanie domyślnych znaków jeśli podano argumenty
+    if (argc > 1){
+        symbolX = &argv[1][0];
+    }
+    if (argc > 2){
+        symbolO = &argv[2][0];
+    }
+}
