@@ -126,6 +126,17 @@ void winnerMessage(int *movesCount, FILE *logFile){
     fclose(logFile);
 }
 
+void startLogFile(FILE **logFile){
+    *logFile = fopen("polibudex_log.txt", "w");
+} 
+
+void checkArguments(int argc, char *argv[]){
+    if (argc > 3){
+        printf("Za duzo argumentow! Podaj dokladnie 2 znaki jako argumenty.\n");
+        return;
+    }
+}
+
 void useArguments(int argc, char *argv[], char *symbolX, char *symbolO){
     //nadpisanie domyślnych znaków jeśli podano argumenty
     if (argc > 1){

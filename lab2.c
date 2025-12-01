@@ -5,11 +5,7 @@
 int main(int argc, char *argv[]){
     
     //nie przyjmuj więcej niż 2 argumenty
-    if (argc > 3){
-        printf("Za duzo argumentow! Podaj dokladnie 2 znaki jako argumenty.\n");
-        return 1;
-    }
-
+    checkArguments(argc, argv);
     char symbolX = 'X';
     char symbolO = 'o';
     // nadpisanie domyślnych znaków jeśli podano argumenty
@@ -21,7 +17,8 @@ int main(int argc, char *argv[]){
     int movesCount = 0;
 
     FILE *logFile;
-    logFile = fopen("polibudex_log.txt", "w");
+    startLogFile(&logFile);
+
     do{
         drawBoard(board, logFile, symbolX, symbolO);    
         // wybor wiersza i kolumny ze sprawdzeniem poprawnosci
@@ -34,6 +31,7 @@ int main(int argc, char *argv[]){
     while(movesCount >= 0);
     if (movesCount == -1){
         drawBoard(board, logFile, symbolX, symbolO);
+        winnerMessage(&movesCount, logFile);
         return 0;
     }
     else if (movesCount == -2){

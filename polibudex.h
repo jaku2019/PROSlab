@@ -8,6 +8,8 @@ void toggleCellAndNeighbors(int (*board)[9], int w, int k);
 void checkWin(int (*board)[9], int *movesCount);
 void gameOver(FILE *logFile);
 void winnerMessage(int *movesCount, FILE *logFile);
+void startLogFile(FILE **logFile);
+void checkArguments(int argc, char *argv[]);
 void useArguments(int argc, char *argv[], char *symbolX, char *symbolO);
 
 extern int board[9][9];
