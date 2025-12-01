@@ -17,8 +17,16 @@ int main(void){
     checkWin(board, &movesCount);
     }
     while(movesCount >= 0);
-    drawBoard(board);
-    printf("Liczba ruchow: %d\n", movesCount);
-    printf("GRATULACJE - WYGRANA!!!\n");
-    return 0;
+    if (movesCount == -1) {
+        drawBoard(board);
+        printf("Liczba ruchow: %d\n", movesCount);
+        printf("GRATULACJE - WYGRANA!!!\n");
+        return 0;
+    }
+    else if (movesCount == -2)
+    {
+        printf("Przekroczono maks. liczbe ruchow. KONIEC GRY!\n");
+        return 0;
+    }
+    
 };
