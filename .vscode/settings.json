@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "polibudex.h": "c"
+        "polibudex.h": "c",
+        "stdio.h": "c"
     }
 }

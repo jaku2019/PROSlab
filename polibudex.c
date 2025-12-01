@@ -2,7 +2,7 @@
 #include "polibudex.h"
 #define MAX_MOVES 5
 
-void drawBoard(int board[9][9], FILE *logFile){
+void drawBoard(int board[9][9], FILE *logFile, char argumentX, char argumentO){
     // lp. kolumn i ramka
     printf("  ");
     fprintf(logFile, "  ");
@@ -19,12 +19,12 @@ void drawBoard(int board[9][9], FILE *logFile){
         fprintf(logFile, "%d.", m + 1);
         for(int n=0; n<9; n++){
             if(board[m][n] == 0){
-            printf("o.");
-            fprintf(logFile, "o.");
+            printf("%c.", argumentO);
+            fprintf(logFile, "%c.", argumentO);
             }
             else{
-            printf("X.");
-            fprintf(logFile, "X.");
+            printf("%c.", argumentX);
+            fprintf(logFile, "%c.", argumentX);
             }
         };
     printf("\n....................\n");
