@@ -1,0 +1,37 @@
+flowchart TD
+    Start([START]) --> CheckArgs[checkArguments]
+    CheckArgs --> UseArgs[useArguments]
+    UseArgs --> StartLog[startLogFile]
+    StartLog --> DrawBoard[drawBoard]
+    DrawBoard --> CheckInput{checkInput}
+    CheckInput -->|Niepoprawne| DrawBoard
+    CheckInput -->|Poprawne| Toggle[toggleCellAndNeighbors]
+    Toggle --> Increment[movesCount++]
+    Increment --> CheckWinFunc[checkWin]
+    CheckWinFunc --> CheckCondition{movesCount >= 0}
+    CheckCondition -->|Tak| DrawBoard
+    CheckCondition -->|Nie| CheckValue{movesCount == -1}
+    CheckValue -->|Tak| DrawFinal[drawBoard]
+    DrawFinal --> Winner[winnerMessage]
+    Winner --> End1([KONIEC])
+    CheckValue -->|Nie| CheckValue2{movesCount == -2}
+    CheckValue2 -->|Tak| GameOver[gameOver]
+    GameOver --> End2([KONIEC])
+    
+    style Start fill:#90EE90
+    style End1 fill:#90EE90
+    style End2 fill:#90EE90
+    style CheckArgs fill:#87CEEB
+    style UseArgs fill:#87CEEB
+    style StartLog fill:#87CEEB
+    style DrawBoard fill:#87CEEB
+    style CheckInput fill:#FFD700
+    style Toggle fill:#87CEEB
+    style Increment fill:#87CEEB
+    style CheckWinFunc fill:#87CEEB
+    style CheckCondition fill:#FFD700
+    style CheckValue fill:#FFD700
+    style CheckValue2 fill:#FFD700
+    style DrawFinal fill:#87CEEB
+    style Winner fill:#87CEEB
+    style GameOver fill:#87CEEB
