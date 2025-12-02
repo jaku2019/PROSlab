@@ -12,10 +12,10 @@ Rysuje planszę 9×9 oraz zapisuje jej stan do pliku logu.
 -   po każdym wierszu drukuje linię kropkowaną
 
 **Parametry:**
-- `board` --- tablica 9×9
-- `logFile` --- uchwyt do pliku logu
-- `argumentX` --- znak odpowiadający wartości 1
-- `argumentO` --- znak odpowiadający wartości 0
+- `board` - tablica 9×9
+- `logFile` - uchwyt do pliku logu
+- `argumentX` - znak odpowiadający wartości 1
+- `argumentO` - znak odpowiadający wartości 0
 
 **Zwraca:** nic
 
@@ -30,10 +30,10 @@ ruchów oraz zakres wejścia.
 -   zwraca 1 przy poprawnym wejściu lub 0 przy błędzie
 
 **Parametry:**\
-- `movesCount` --- licznik ruchów
-- `inputRow` --- wskaźnik na wybrany wiersz
-- `inputCol` --- wskaźnik na wybraną kolumnę
-- `logFile` --- uchwyt do pliku logu
+- `movesCount` - licznik ruchów
+- `inputRow` - wskaźnik na wybrany wiersz
+- `inputCol` - wskaźnik na wybraną kolumnę
+- `logFile` - uchwyt do pliku logu
 
 **Zwraca:** 1 lub 0
 
