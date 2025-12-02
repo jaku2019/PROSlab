@@ -1,4 +1,4 @@
-# Jakub Tatarski nr 337166 4.11.2025
+# Jakub Tatarski nr 337166 2.12.2025
 Program uruchamia w pętli main kolejne funkcje. Poniżej przedstawiono występujące w programie zmienne i funkcje.
 
 ## drawBoard
