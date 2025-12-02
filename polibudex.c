@@ -112,12 +112,14 @@ void checkWin(int board[9][9], int *movesCount){
     };
 }
 
+// wypisanie komunikatu o przegranej i zamknięcie pliku
 void gameOver(FILE *logFile){
     printf("Przekroczono maks. liczbe ruchow. KONIEC GRY!\n");
     fprintf(logFile, "Przekroczono maks. liczbe ruchow. KONIEC GRY!\n");
     fclose(logFile);
 }
 
+// wypisanie komunikatu o wygranej i zamknięcie pliku
 void winnerMessage(int *movesCount, FILE *logFile){
     printf("Liczba ruchow: %d\n", *movesCount);
     fprintf(logFile, "Liczba ruchow: %d\n", *movesCount);
@@ -126,10 +128,12 @@ void winnerMessage(int *movesCount, FILE *logFile){
     fclose(logFile);
 }
 
+// otwarcie pliku logu
 void startLogFile(FILE **logFile){
     *logFile = fopen("polibudex_log.txt", "w");
 } 
 
+// sprawdzenie liczby argumentów
 void checkArguments(int argc, char *argv[]){
     if (argc > 3){
         printf("Za duzo argumentow! Podaj dokladnie 2 znaki jako argumenty.\n");
@@ -137,6 +141,7 @@ void checkArguments(int argc, char *argv[]){
     }
 }
 
+//nadpisanie domyślnych znaków jeśli podano argumenty
 void useArguments(int argc, char *argv[], char *symbolX, char *symbolO){
     //nadpisanie domyślnych znaków jeśli podano argumenty
     if (argc > 1){
