@@ -1,74 +1,91 @@
 # Jakub Tatarski nr 337166 4.11.2025
 Program uruchamia w pętli main kolejne funkcje. Poniżej przedstawiono występujące w programie zmienne i funkcje.
 
-## Zmienne globalne
+## drawBoard
 
-### `int board[9][9]`
+Rysuje planszę 9×9 oraz zapisuje jej stan do pliku logu. - wypisuje
+nagłówki kolumn 1--9 - rysuje ramkę - dla każdego pola drukuje symbol
+zgodny z argumentX lub argumentO - po każdym wierszu drukuje linię
+kropkowaną
 
-Plansza gry 9×9, domyślnie wypełniona wartościami `0`.\
-Funkcja `drawBoard` interpretuje wartości: - `0` - drukuje `o.` - `1`
-- drukuje `X.`
+**Parametry:** - board -- tablica 9×9 - logFile -- uchwyt do pliku
+logu - argumentX -- znak odpowiadający wartości 1 - argumentO -- znak
+odpowiadający wartości 0
 
-### `int inputRow`
-
-Numer wiersza wybrany przez użytkownika (zakres `1–9`).
-
-### `int inputCol`
-
-Numer kolumny wybrany przez użytkownika (zakres `1–9`).
-
-### `int movesCount = 0`
-
-Licznik wykonanych ruchów.\
-Ustawienie `movesCount = -1` kończy pętlę gry.
-
-## Funkcje
-
-### `void drawBoard(void)`
-
-Rysuje aktualny stan planszy: - wypisuje nagłówki kolumn `1–9`, - rysuje
-linię ramki, - dla każdego wiersza wypisuje numer, zawartość pól i linię
-oddzielającą.
-
-**Parametry:** brak
 **Zwraca:** nic
 
-### `int checkInput(void)`
+## checkInput
 
-Pobiera i weryfikuje dane podane przez użytkownika: - odczytuje
-`tmpInputRow` i `tmpInputCol`, - sprawdza zakres `1–9`, - jeśli wartości
-poprawne, przepisuje je do `inputRow` i `inputCol`, wypisuje
-potwierdzenie i zwraca `1`, - jeśli błędne, wypisuje komunikat i zwraca
-`0`.
+Pobiera współrzędne ruchu od użytkownika, kontroluje liczbę pozostałych
+ruchów oraz zakres wejścia. - zmniejsza licznik dostępnych ruchów - przy
+braku ruchów ustawia movesCount na -2 - sprawdza zakres 1--9 - zwraca 1
+przy poprawnym wejściu lub 0 przy błędzie
 
-**Parametry:** brak
-**Zwraca:**
-- `1` - poprawne dane
-- `0` - błąd
+**Parametry:** - movesCount -- licznik ruchów - inputRow -- wskaźnik na
+wybrany wiersz - inputCol -- wskaźnik na wybraną kolumnę - logFile --
+uchwyt do pliku logu
 
-### `void toggleCell(int row, int col)`
+**Zwraca:** 1 lub 0
 
-Odwraca stan pola: - `0` - zamienia na `1` - `1` - zamienia na `0`
+## toggleCell
 
-**Parametry:** `row` i `col` w zakresie `0–8`
+Odwraca stan wybranego pola planszy. - 0 zamienia na 1 - 1 zamienia na 0
+
+**Parametry:** board, row, col\
 **Zwraca:** nic
 
-### `void toggleCellAndNeighbors(int w, int k)`
+## toggleCellAndNeighbors
 
-Zmienia stan wybranego pola i jego sąsiadów.
-Modyfikuje tylko pola mieszczące się w granicach planszy.
+Odwraca stan wybranego pola oraz jego sąsiadów w górę, dół, lewo i prawo
+(jeśli mieszczą się w planszy).
 
-**Parametry:** `w` i `k` w zakresie `0–8`
+**Parametry:** board, w, k\
 **Zwraca:** nic
 
-### `void checkWin(void)`
+## checkWin
 
-Sprawdza, czy wszystkie pola są równe `1`: - sumuje wszystkie elementy
-tablicy `board`, - jeśli suma wynosi `81`, ustawia `movesCount = -1`, co
-oznacza wygraną.
+Sprawdza, czy wszystkie pola planszy mają wartość 1. - jeśli suma
+wszystkich pól wyniesie 81, ustawia movesCount na -1
 
-**Parametry:** brak
+**Parametry:** board, movesCount\
 **Zwraca:** nic
 
-## pętla main()
-Pętla `main` uruchamia pętlę `do…while`, w której najpierw rysuje planszę, a potem pobiera ruch; jeśli `checkInput()` zwróci błąd, pomija ruch i iterację. Przy poprawnym wejściu odwraca wskazane pole i jego sąsiadów (`toggleCellAndNeighbors`), zwiększa `movesCount` i sprawdza zwycięstwo funkcją `checkWin()`. Pętla trwa, dopóki `movesCount` nie zostanie ustawiony na -1 (wygrana). Po wyjściu program rysuje planszę końcową, wypisuje liczbę ruchów i komunikat o wygranej.
+## gameOver
+
+Wypisuje komunikat o przegranej i zamyka plik logu.
+
+**Parametry:** logFile\
+**Zwraca:** nic
+
+## winnerMessage
+
+Wypisuje liczbę ruchów, komunikat o zwycięstwie i zamyka plik logu.
+
+**Parametry:** movesCount, logFile\
+**Zwraca:** nic
+
+## startLogFile
+
+Otwiera plik polibudex_log.txt w trybie zapisu.
+
+**Parametry:** logFile\
+**Zwraca:** nic
+
+## checkArguments
+
+Sprawdza liczbę argumentów i ostrzega przy podaniu więcej niż dwóch
+symboli.
+
+**Parametry:** argc, argv\
+**Zwraca:** nic
+
+## useArguments
+
+Nadpisuje domyślne symbole X i O, jeśli zostały przekazane w
+argumentach.
+
+**Parametry:** argc, argv, symbolX, symbolO\
+**Zwraca:** nic
+
+## z lotu ptaka
+Pętla `main` uruchamia funkcje `checkArguments`, `useArguments` i `startLogFile`. Dwa pierwsze są odpowiedzialne za obsługę parametrów przekazywanych przez main, ten ostatni uruchamia zapis historii do pliku "polibudex_log.txt". Dalej uruchamiana jest pętla `do…while`, w której najpierw rysowana jest plansza, a potem pobierany jest ruch; jeśli `checkInput()` zwróci błąd, pomijamy ruch i iterację. Przy poprawnym wejściu funkcja odwraca wskazane pole i jego sąsiadów (`toggleCellAndNeighbors`), zwiększa `movesCount` i sprawdza zwycięstwo funkcją `checkWin()`. Pętla trwa, dopóki `movesCount` nie zostanie ustawiony na -1 (wygrana) lub  -2 (przegrana). Po wyjściu program rysuje planszę końcową, wypisuje liczbę ruchów i komunikat o wygranej lub komunikat o przegranej (wykorzystaniu wszystkich ruchów). W obydwu wariantach zostaje również zamknięty plik z historią gry.
