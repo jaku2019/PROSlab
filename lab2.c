@@ -4,10 +4,10 @@
 
 int main(int argc, char *argv[]){
     
-    //nie przyjmuj więcej niż 2 argumenty
-    checkArguments(argc, argv);
     char symbolX = 'X';
     char symbolO = 'o';
+    //nie przyjmuj więcej niż 2 argumenty
+    checkArguments(argc, argv);
     // nadpisanie domyślnych znaków jeśli podano argumenty
     useArguments(argc, argv, &symbolX, &symbolO);
 

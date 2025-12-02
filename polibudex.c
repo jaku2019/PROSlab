@@ -140,9 +140,9 @@ void checkArguments(int argc, char *argv[]){
 void useArguments(int argc, char *argv[], char *symbolX, char *symbolO){
     //nadpisanie domyślnych znaków jeśli podano argumenty
     if (argc > 1){
-        symbolX = &argv[1][0];
+        *symbolX = argv[1][0];
     }
     if (argc > 2){
-        symbolO = &argv[2][0];
+        *symbolO = argv[2][0];
     }
 }
