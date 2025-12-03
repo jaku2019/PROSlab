@@ -11,7 +11,7 @@ int main(int argc, char *argv[]){
     // nadpisanie domyślnych znaków jeśli podano argumenty
     useArguments(argc, argv, &symbolX, &symbolO);
 
-    int board[9][9]={0};
+    cell board[9][9]={0};
     int inputRow;
     int inputCol;
     int movesCount = 0;
@@ -22,7 +22,7 @@ int main(int argc, char *argv[]){
     do{
         drawBoard(board, logFile, symbolX, symbolO);    
         // wybor wiersza i kolumny ze sprawdzeniem poprawnosci
-        if (!checkInput(&movesCount, &inputRow, &inputCol, logFile)) continue;          // zły zakres - pomiń ruch
+        if (!checkInput(&movesCount, &inputRow, &inputCol, logFile, board)) continue;          // zły zakres - pomiń ruch
         // zmiana wybranego znaku i jego sasiadow na przeciwne
         toggleCellAndNeighbors(board, inputRow - 1, inputCol - 1);
         movesCount++;
