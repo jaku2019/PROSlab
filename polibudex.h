@@ -12,6 +12,7 @@ void toggleCell(cell board[9][9], int row, int col);
 void toggleCellAndNeighbors(cell board[9][9], int w, int k);
 void checkWin(cell board[9][9], int *movesCount);
 void gameOver(FILE *logFile);
+void gameOverCell(FILE *logFile);
 void winnerMessage(int *movesCount, FILE *logFile);
 void startLogFile(FILE **logFile);
 void checkArguments(int argc, char *argv[]);

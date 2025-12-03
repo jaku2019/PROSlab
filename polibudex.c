@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "polibudex.h"
 #define MAX_MOVES 5
+#define MAX_CELL_CHANGES 3
 
 
 
@@ -43,12 +44,23 @@ int checkInput(int *movesCount, int *inputRow, int *inputCol, FILE *logFile, cel
         *movesCount = -2;
         return 0;
     }
+
+    countChanges(board, logFile);
+    // sprawdzenie czy któraś komórka nie przekroczyła max liczby zmian
+    for(int m=0; m<9; m++){
+        for(int n=0; n<9; n++){
+            if(board[m][n].changes > MAX_CELL_CHANGES){
+                *movesCount = -3;
+                return 0;
+            }
+        }
+    };
     printf("Pozostalo ruchow: %d\n", remainingMoves);
     fprintf(logFile, "Pozostalo ruchow: %d\n", remainingMoves);
     remainingMoves--;
     printf("Liczba ruchow: %d\n", *movesCount);
     fprintf(logFile, "Liczba ruchow: %d\n", *movesCount);
-    countChanges(board, logFile);
+
 
     printf("Podaj nr wiersza (1-9): ");
     fprintf(logFile, "Podaj nr wiersza (1-9): ");
@@ -123,6 +135,13 @@ void gameOver(FILE *logFile){
     fclose(logFile);
 }
 
+// wypisanie komunikatu o przegranej i zamknięcie pliku
+void gameOverCell(FILE *logFile){
+    printf("Przekroczono maks. liczbe zmian komorki. KONIEC GRY!\n");
+    fprintf(logFile, "Przekroczono maks. liczbe zmian komorki (%d). KONIEC GRY!\n");
+    fclose(logFile);
+}
+
 // wypisanie komunikatu o wygranej i zamknięcie pliku
 void winnerMessage(int *movesCount, FILE *logFile){
     printf("Liczba ruchow: %d\n", *movesCount);
@@ -155,7 +174,7 @@ void useArguments(int argc, char *argv[], char *symbolX, char *symbolO){
         *symbolO = argv[2][0];
     }
 }
-// liczy i wypisuje komórkę zmienianą najwięcej razy
+// zliczenie i wypisanie komórki zmienianej najwięcej razy
 void countChanges(cell board[9][9], FILE *logFile){
     int maxChanges = board[0][0].changes;
     int maxRow = 0;

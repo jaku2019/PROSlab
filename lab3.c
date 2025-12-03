@@ -38,5 +38,8 @@ int main(int argc, char *argv[]){
         gameOver(logFile);
         return 0;
     }
-    
+    else if (movesCount == -3){
+        gameOverCell(logFile);
+        return 0;
+    }    
 };
