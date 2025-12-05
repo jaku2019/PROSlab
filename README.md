@@ -131,4 +131,4 @@ argumentach.
 ## z lotu ptaka
 Pętla `main` uruchamia funkcje `checkArguments`, `useArguments` i `startLogFile`. Dwa pierwsze są odpowiedzialne za obsługę parametrów przekazywanych przez main, ten ostatni uruchamia zapis historii do pliku "polibudex_log.txt". Dalej uruchamiana jest pętla `do…while`, w której najpierw rysowana jest plansza, a potem pobierany jest ruch; jeśli `checkInput()` zwróci błąd, pomijamy ruch i iterację. Przy poprawnym wejściu funkcja odwraca wskazane pole i jego sąsiadów (`toggleCellAndNeighbors`), zwiększa `movesCount` i sprawdza zwycięstwo funkcją `checkWin()`. Pętla trwa, dopóki `movesCount` nie zostanie ustawiony na -1 (wygrana) lub  -2 (przegrana). Po wyjściu program rysuje planszę końcową, wypisuje liczbę ruchów i komunikat o wygranej lub komunikat o przegranej (wykorzystaniu wszystkich ruchów). W obydwu wariantach zostaje również zamknięty plik z historią gry.
 
-![schemat_blokowy](https://github.com/jaku2019/PROSlab/blob/d4eedddd3b35cd2a35041f327ac31b58900c7c4e/sch_blok2.png)
+![schemat_blokowy](images/sch_blok2.png)
