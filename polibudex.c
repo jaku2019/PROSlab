@@ -3,7 +3,22 @@
 #define MAX_MOVES 5
 #define MAX_CELL_CHANGES 3
 
+// tworzenie tablicy
+void createBoard(cell ***board, int rows, int cols){
+    *board = (cell**) calloc(rows, sizeof(cell*));
+    for(int i=0; i<rows; i++){
+        (*board)[i] = (cell*) calloc(cols, sizeof(cell));
+    }
+    return 0;
+}
 
+// czyszczenie pamięci tablicy
+void freeBoard(cell ***board, int rows){
+    for(int i=0; i<rows; i++){
+        free(*board[i]);
+    }
+    free(*board);
+}
 
 void drawBoard(cell board[9][9], FILE *logFile, char argumentX, char argumentO){
     // lp. kolumn i ramka
