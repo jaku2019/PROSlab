@@ -3,28 +3,28 @@
 #define MAX_MOVES 5
 #define MAX_CELL_CHANGES 3
 
+
 // tworzenie tablicy
 void createBoard(cell ***board, int rows, int cols){
     *board = (cell**) calloc(rows, sizeof(cell*));
     for(int i=0; i<rows; i++){
         (*board)[i] = (cell*) calloc(cols, sizeof(cell));
     }
-    return 0;
 }
 
 // czyszczenie pamięci tablicy
-void freeBoard(cell ***board, int rows){
+void freeBoard(cell **board, int rows){
     for(int i=0; i<rows; i++){
-        free(*board[i]);
+        free(board[i]);
     }
-    free(*board);
+    free(board);
 }
 
-void drawBoard(cell board[9][9], FILE *logFile, char argumentX, char argumentO){
+void drawBoard(cell **board, int rows, int cols, FILE *logFile, char argumentX, char argumentO){
     // lp. kolumn i ramka
     printf("  ");
     fprintf(logFile, "  ");
-    for(int n=0; n<9; n++){
+    for(int n=0; n<rows; n++){
         printf("%d ", n+1);
         fprintf(logFile, "%d ", n+1);
     };
@@ -50,7 +50,7 @@ void drawBoard(cell board[9][9], FILE *logFile, char argumentX, char argumentO){
     }
 };
 //pryjęcie nr. wiersza i kolumny, przerwanie gdy spoza zakresu
-int checkInput(int *movesCount, int *inputRow, int *inputCol, FILE *logFile, cell board[9][9]){
+int checkInput(int *movesCount, int *inputRow, int *inputCol, FILE *logFile, cell **board, int rows, int cols){
     int tmpInputRow, tmpInputCol;
 
     // max liczba ruchów, przekroczenie kończy grę
@@ -60,7 +60,7 @@ int checkInput(int *movesCount, int *inputRow, int *inputCol, FILE *logFile, cel
         return 0;
     }
 
-    countChanges(board, logFile);
+    countChanges(board, rows, cols, logFile);
     // sprawdzenie czy któraś komórka nie przekroczyła max liczby zmian
     for(int m=0; m<9; m++){
         for(int n=0; n<9; n++){
@@ -105,7 +105,7 @@ int checkInput(int *movesCount, int *inputRow, int *inputCol, FILE *logFile, cel
     return 1;
 };
 //zamiana znaku w macierzLiczb na przeciwny
-void toggleCell(cell board[9][9], int row, int col){
+void toggleCell(cell **board, int rows, int cols, int row, int col){
     if (board[row][col].state == 0){
         board[row][col].state = 1;
     }
@@ -115,23 +115,23 @@ void toggleCell(cell board[9][9], int row, int col){
     board[row][col].changes++;
 };
 // zamiana znaku i jego sasiadów w macierzLiczb
-void toggleCellAndNeighbors(cell board[9][9], int w, int k){
-    toggleCell(board, w, k);
+void toggleCellAndNeighbors(cell **board, int rows, int cols, int w, int k){
+    toggleCell(board, rows, cols, w, k);
     if(w >= 0 && w < 8){
-        toggleCell(board, w + 1, k);
+        toggleCell(board, rows, cols, w + 1, k);
     };
     if(w <= 8 && w > 0){
-        toggleCell(board, w - 1, k);
+        toggleCell(board, rows, cols, w - 1, k);
     };
     if(k >= 0 && k < 8){
-        toggleCell(board, w, k + 1);
+        toggleCell(board, rows, cols, w, k + 1);
     };
     if(k <= 8 && k > 0){
-        toggleCell(board, w, k - 1);
+        toggleCell(board, rows, cols, w, k - 1);
     };
 };
 // liczy sume elementow macierzLiczb, gdy same x-y ustawia licznik na -1
-void checkWin(cell board[9][9], int *movesCount){
+void checkWin(cell **board, int rows, int cols, int *movesCount){
     int suma = 0;
     for(int m=0; m<9; m++){
         for(int n=0; n<9; n++){
@@ -190,7 +190,7 @@ void useArguments(int argc, char *argv[], char *symbolX, char *symbolO){
     }
 }
 // zliczenie i wypisanie komórki zmienianej najwięcej razy
-void countChanges(cell board[9][9], FILE *logFile){
+void countChanges(cell  **board, int rows, int cols, FILE *logFile){
     int maxChanges = board[0][0].changes;
     int maxRow = 0;
     int maxCol = 0;
