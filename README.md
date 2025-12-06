@@ -164,3 +164,52 @@ Sprawdza która komórka tablicy była zmieniana najwięcej razy
 
 ## z lotu ptaka
 Pętla `main` uruchamia funkcje `checkArguments`, `useArguments` i `startLogFile`. Dwa pierwsze są odpowiedzialne za obsługę parametrów przekazywanych przez main, ten ostatni uruchamia zapis historii do pliku "polibudex_log.txt". Dalej uruchamiana jest pętla `do…while`, w której najpierw rysowana jest plansza, a potem pobierany jest ruch; jeśli `checkInput()` zwróci błąd, pomijamy ruch i iterację. Przy poprawnym wejściu funkcja odwraca wskazane pole i jego sąsiadów (`toggleCellAndNeighbors`), zwiększa `movesCount` i sprawdza zwycięstwo funkcją `checkWin()`. Pętla trwa, dopóki `movesCount` nie zostanie ustawiony na -1 (wygrana) lub  -2 (przegrana). Po wyjściu program rysuje planszę końcową, wypisuje liczbę ruchów i komunikat o wygranej lub komunikat o przegranej (wykorzystaniu wszystkich ruchów). W obydwu wariantach zostaje również zamknięty plik z historią gry.
+
+flowchart TD
+    Start([START]) --> CheckArgs[checkArguments]
+    CheckArgs --> UseArgs[useArguments]
+    UseArgs --> StartLog[startLogFile]
+    StartLog --> CreateBoard[createBoard]
+    CreateBoard --> DrawBoard[drawBoard]
+    DrawBoard --> CheckInput{checkInput}
+    CheckInput -->|Niepoprawne| DrawBoard
+    CheckInput -->|Poprawne| Toggle[toggleCellAndNeighbors]
+    Toggle --> Increment[movesCount++]
+    Increment --> CheckWinFunc[checkWin]
+    CheckWinFunc --> CheckCondition{movesCount >= 0}
+    CheckCondition -->|Tak| DrawBoard
+    CheckCondition -->|Nie| CheckValue{movesCount == ?}
+    
+    CheckValue -->|"-1"| DrawFinal[drawBoard]
+    DrawFinal --> WinMessage[winnerMessage]
+    WinMessage --> FreeBoard1[freeBoard]
+    FreeBoard1 --> End([KONIEC])
+
+    CheckValue -->|"-2"| GameOver[gameOver]
+    GameOver --> FreeBoard2[freeBoard]
+    FreeBoard2 --> End
+
+    CheckValue -->|"-3"| GameOverCell[gameOverCell]
+    GameOverCell --> FreeBoard3[freeBoard]
+    FreeBoard3 --> End
+    
+    style Start fill:#90EE90
+    style End fill:#90EE90
+    style CheckArgs fill:#87CEEB
+    style UseArgs fill:#87CEEB
+    style StartLog fill:#87CEEB
+    style CreateBoard fill:#87CEEB
+    style DrawBoard fill:#87CEEB
+    style CheckInput fill:#FFD700
+    style Toggle fill:#87CEEB
+    style Increment fill:#87CEEB
+    style CheckWinFunc fill:#87CEEB
+    style CheckCondition fill:#FFD700
+    style CheckValue fill:#FFD700
+    style DrawFinal fill:#87CEEB
+    style WinMessage fill:#87CEEB
+    style FreeBoard1 fill:#87CEEB
+    style FreeBoard2 fill:#87CEEB
+    style FreeBoard3 fill:#87CEEB
+    style GameOver fill:#87CEEB
+    style GameOverCell fill:#87CEEB
