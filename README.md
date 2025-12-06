@@ -1,6 +1,28 @@
 # Jakub Tatarski nr 337166 5.12.2025
 Program uruchamia w pętli main kolejne funkcje. Poniżej przedstawiono występujące w programie zmienne i funkcje.
 
+
+## createBoard
+
+Tworzy dynamicznie zaalokowaną tablicę dwuwymiarową (tablicę struktur `cell`). Funkcja rezerwuje pamięć najpierw na tablicę wskaźników (wiersze), a następnie na każdy wiersz osobno. Alokuje tablicę wskaźników o długości `rows`, następnie dla każdego wiersza rezerwuje `cols` i zapisuje wynik przez przekazany wskaźnik.
+
+**Parametry:**
+- `board` – potrójny wskaźnik, do którego zostanie zapisany adres utworzonej tablicy  
+- `rows` – liczba wierszy  
+- `cols` – liczba kolumn  
+
+**Zwraca:** nic
+
+## freeBoard
+
+Zwalnia pamięć zajmowaną przez dynamicznie utworzoną tablicę dwuwymiarową. Dla każdego wiersza wywołuje `free` na zaalokowanej tablicy, a po zwolnieniu wszystkich wierszy wywołuje `free` na tablicy wskaźników.
+
+**Parametry:**
+- `board` – wskaźnik na tablicę dwuwymiarową typu `cell`  
+- `rows` – liczba wierszy  
+
+**Zwraca:** nic
+
 ## drawBoard
 
 Rysuje planszę 9×9 oraz zapisuje jej stan do pliku logu.
@@ -29,7 +51,7 @@ ruchów oraz zakres wejścia.
 -   sprawdza zakres 1--9
 -   zwraca 1 przy poprawnym wejściu lub 0 przy błędzie
 
-**Parametry:**\
+**Parametry:**
 - `movesCount` - licznik ruchów
 - `inputRow` - wskaźnik na wybrany wiersz
 - `inputCol` - wskaźnik na wybraną kolumnę
@@ -132,7 +154,7 @@ argumentach.
 Sprawdza która komórka tablicy była zmieniana najwięcej razy 
 (pole struktury `changes`). Printfuje wynik operacji.
 
-**Parametry:**\
+**Parametry:**
 - `board`
 - `rows` - wskaźnik na wybrany wiersz
 - `cols` - wskaźnik na wybraną kolumnę
