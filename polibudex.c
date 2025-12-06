@@ -24,7 +24,7 @@ void drawBoard(cell **board, int rows, int cols, FILE *logFile, char argumentX, 
     // lp. kolumn i ramka
     printf("  ");
     fprintf(logFile, "  ");
-    for(int n=0; n<rows; n++){
+    for(int n=0; n<cols; n++){
         printf("%d ", n+1);
         fprintf(logFile, "%d ", n+1);
     };
@@ -32,10 +32,10 @@ void drawBoard(cell **board, int rows, int cols, FILE *logFile, char argumentX, 
     fprintf(logFile, "\n....................\n");
 
     // wypisanie zawartosci macierzy i lp. wierszy
-    for(int m=0; m<9; m++){
+    for(int m=0; m<rows; m++){
         printf("%d.", m + 1);
         fprintf(logFile, "%d.", m + 1);
-        for(int n=0; n<9; n++){
+        for(int n=0; n<cols; n++){
             if(board[m][n].state == 0){
             printf("%c.", argumentO);
             fprintf(logFile, "%c.", argumentO);
@@ -62,8 +62,8 @@ int checkInput(int *movesCount, int *inputRow, int *inputCol, FILE *logFile, cel
 
     countChanges(board, rows, cols, logFile);
     // sprawdzenie czy któraś komórka nie przekroczyła max liczby zmian
-    for(int m=0; m<9; m++){
-        for(int n=0; n<9; n++){
+    for(int m=0; m<rows; m++){
+        for(int n=0; n<cols; n++){
             if(board[m][n].changes > MAX_CELL_CHANGES){
                 *movesCount = -3;
                 return 0;
@@ -81,7 +81,7 @@ int checkInput(int *movesCount, int *inputRow, int *inputCol, FILE *logFile, cel
     fprintf(logFile, "Podaj nr wiersza (1-9): ");
     scanf("%d", &tmpInputRow);
     fscanf(logFile, "%d", &tmpInputRow);
-    if (tmpInputRow < 1 || tmpInputRow > 9) {
+    if (tmpInputRow < 1 || tmpInputRow > rows) {
         printf("Podano bledny nr wiersza! Sprobuj ponownie.\n");
         fprintf(logFile, "Podano bledny nr wiersza! Sprobuj ponownie.\n");
         return 0;
@@ -91,7 +91,7 @@ int checkInput(int *movesCount, int *inputRow, int *inputCol, FILE *logFile, cel
     fprintf(logFile, "Podaj nr kolumny (1-9): ");
     scanf("%d", &tmpInputCol);
     fscanf(logFile, "%d", &tmpInputCol);
-    if (tmpInputCol < 1 || tmpInputCol > 9) {
+    if (tmpInputCol < 1 || tmpInputCol > cols) {
         printf("Podano bledny nr kolumny! Sprobuj ponownie.\n");
         fprintf(logFile, "Podano bledny nr kolumny! Sprobuj ponownie.\n");
         return 0;
@@ -117,28 +117,28 @@ void toggleCell(cell **board, int rows, int cols, int row, int col){
 // zamiana znaku i jego sasiadów w macierzLiczb
 void toggleCellAndNeighbors(cell **board, int rows, int cols, int w, int k){
     toggleCell(board, rows, cols, w, k);
-    if(w >= 0 && w < 8){
+    if(w >= 0 && w < rows-1){
         toggleCell(board, rows, cols, w + 1, k);
     };
-    if(w <= 8 && w > 0){
+    if(w <= rows-1 && w > 0){
         toggleCell(board, rows, cols, w - 1, k);
     };
-    if(k >= 0 && k < 8){
+    if(k >= 0 && k < cols-1){
         toggleCell(board, rows, cols, w, k + 1);
     };
-    if(k <= 8 && k > 0){
+    if(k <= cols-1 && k > 0){
         toggleCell(board, rows, cols, w, k - 1);
     };
 };
 // liczy sume elementow macierzLiczb, gdy same x-y ustawia licznik na -1
 void checkWin(cell **board, int rows, int cols, int *movesCount){
     int suma = 0;
-    for(int m=0; m<9; m++){
-        for(int n=0; n<9; n++){
+    for(int m=0; m<rows; m++){
+        for(int n=0; n<cols; n++){
             suma += board[m][n].state;
         };
     };
-    if(suma == 81){
+    if(suma == rows*cols){
         *movesCount = -1;
     };
 }
@@ -194,8 +194,8 @@ void countChanges(cell  **board, int rows, int cols, FILE *logFile){
     int maxChanges = board[0][0].changes;
     int maxRow = 0;
     int maxCol = 0;
-    for(int m=0; m<9; m++){
-        for(int n=0; n<9; n++){
+    for(int m=0; m<rows; m++){
+        for(int n=0; n<cols; n++){
             if(board[m][n].changes > maxChanges){
                 maxChanges = board[m][n].changes;
                 maxRow = m;
