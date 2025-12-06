@@ -1,4 +1,4 @@
-# Jakub Tatarski nr 337166 2.12.2025
+# Jakub Tatarski nr 337166 5.12.2025
 Program uruchamia w pętli main kolejne funkcje. Poniżej przedstawiono występujące w programie zmienne i funkcje.
 
 ## drawBoard
@@ -127,6 +127,18 @@ argumentach.
 
 **Zwraca:** nic
 
+## countChanges
+
+Sprawdza która komórka tablicy była zmieniana najwięcej razy 
+(pole struktury `changes`). Printfuje wynik operacji.
+
+**Parametry:**\
+- `board`
+- `rows` - wskaźnik na wybrany wiersz
+- `cols` - wskaźnik na wybraną kolumnę
+- `logFile`
+
 **Zwraca:** nic
+
 ## z lotu ptaka
 Pętla `main` uruchamia funkcje `checkArguments`, `useArguments` i `startLogFile`. Dwa pierwsze są odpowiedzialne za obsługę parametrów przekazywanych przez main, ten ostatni uruchamia zapis historii do pliku "polibudex_log.txt". Dalej uruchamiana jest pętla `do…while`, w której najpierw rysowana jest plansza, a potem pobierany jest ruch; jeśli `checkInput()` zwróci błąd, pomijamy ruch i iterację. Przy poprawnym wejściu funkcja odwraca wskazane pole i jego sąsiadów (`toggleCellAndNeighbors`), zwiększa `movesCount` i sprawdza zwycięstwo funkcją `checkWin()`. Pętla trwa, dopóki `movesCount` nie zostanie ustawiony na -1 (wygrana) lub  -2 (przegrana). Po wyjściu program rysuje planszę końcową, wypisuje liczbę ruchów i komunikat o wygranej lub komunikat o przegranej (wykorzystaniu wszystkich ruchów). W obydwu wariantach zostaje również zamknięty plik z historią gry.
