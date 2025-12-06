@@ -1,6 +1,6 @@
 # Jakub Tatarski nr 337166 5.12.2025
-Program uruchamia w pętli main kolejne funkcje. Poniżej przedstawiono występujące w programie zmienne i funkcje.
 
+Program umożliwia zmianę symboli `X` i `o`, prowadzi log rozgrywki w pliku `polibudex_log.txt`, a także zlicza liczbę zmian dokonanych na każdej komórce. Poniżej przedstawiono występujące w programie zmienne i funkcje.
 
 ## createBoard
 
@@ -48,7 +48,7 @@ ruchów oraz zakres wejścia.
 
 -   zmniejsza licznik dostępnych ruchów
 -   przy braku ruchów ustawia `movesCount` na -2
--   sprawdza zakres 1--9
+-   sprawdza zakres 1--`rows` lub 1--`cols`
 -   zwraca 1 przy poprawnym wejściu lub 0 przy błędzie
 
 **Parametry:**
@@ -89,7 +89,7 @@ Odwraca stan wybranego pola oraz jego sąsiadów w górę, dół, lewo i prawo
 
 Sprawdza, czy wszystkie pola planszy mają wartość 1.
 
--   jeśli suma pól wynosi 81, ustawia `movesCount` na -1
+-   jeśli suma pól wynosi tyle co rows*cols (cała plansza jedynek), ustawia `movesCount` na -1
 
 **Parametry:**
 - `board`
@@ -163,6 +163,16 @@ Sprawdza która komórka tablicy była zmieniana najwięcej razy
 **Zwraca:** nic
 
 ## z lotu ptaka
-Pętla `main` uruchamia funkcje `checkArguments`, `useArguments` i `startLogFile`. Dwa pierwsze są odpowiedzialne za obsługę parametrów przekazywanych przez main, ten ostatni uruchamia zapis historii do pliku "polibudex_log.txt". Dalej uruchamiana jest pętla `do…while`, w której najpierw rysowana jest plansza, a potem pobierany jest ruch; jeśli `checkInput()` zwróci błąd, pomijamy ruch i iterację. Przy poprawnym wejściu funkcja odwraca wskazane pole i jego sąsiadów (`toggleCellAndNeighbors`), zwiększa `movesCount` i sprawdza zwycięstwo funkcją `checkWin()`. Pętla trwa, dopóki `movesCount` nie zostanie ustawiony na -1 (wygrana) lub  -2 (przegrana). Po wyjściu program rysuje planszę końcową, wypisuje liczbę ruchów i komunikat o wygranej lub komunikat o przegranej (wykorzystaniu wszystkich ruchów). W obydwu wariantach zostaje również zamknięty plik z historią gry.
+## z lotu ptaka
+Pętla `main` uruchamia funkcje `checkArguments`, `useArguments` i `startLogFile`.  
+Dwa pierwsze odpowiadają za obsługę parametrów przekazywanych do programu, a `startLogFile` uruchamia zapis historii do pliku *polibudex_log.txt*.  
+Następnie funkcja `createBoard` tworzy planszę o wybranym rozmiarze (`const int ROWS=, COLS=`).
+
+Dalej uruchamiana jest pętla `do…while`, w której najpierw rysowana jest plansza, a potem pobierany jest ruch; jeśli `checkInput()` zwróci błąd, pomijamy ruch i iterację.  
+Przy poprawnym wejściu funkcja "odwraca" wskazane pole i jego sąsiadów (`toggleCellAndNeighbors`), zwiększa `movesCount` i sprawdza zwycięstwo funkcją `checkWin()`.  
+Pętla trwa, dopóki `movesCount` nie zostanie ustawiony na -1 (wygrana), -2 (przegrana z powodu braku ruchów) lub -3 (zbyt dużo zmian jednej komórki).
+
+Po wyjściu program rysuje planszę końcową, wypisuje liczbę ruchów i komunikat o wygranej lub przegranej. W obu wariantach zostaje również zamknięty plik z historią gry i zwolniona zostaje pamięć planszy.
+
 
 ![schemat_blokowy](images/sch_blok3.png)
