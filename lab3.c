@@ -13,7 +13,7 @@ int main(int argc, char *argv[]){
     // nadpisanie domyślnych znaków jeśli podano argumenty
     useArguments(argc, argv, &symbolX, &symbolO);
     
-    const int ROWS = 9, COLS = 9;
+    const int ROWS = 5, COLS = 5;
     cell **board;
 
     int inputRow;

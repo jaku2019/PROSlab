@@ -28,8 +28,15 @@ void drawBoard(cell **board, int rows, int cols, FILE *logFile, char argumentX, 
         printf("%d ", n+1);
         fprintf(logFile, "%d ", n+1);
     };
-    printf("\n....................\n");
-    fprintf(logFile, "\n....................\n");
+    //przewa ...
+    printf("\n");
+    fprintf(logFile, "\n");
+    for(int i=0; i<cols*2; i++){
+        printf(".");
+        fprintf(logFile, ".");
+    }
+    printf("\n");
+    fprintf(logFile, "\n");
 
     // wypisanie zawartosci macierzy i lp. wierszy
     for(int m=0; m<rows; m++){
@@ -45,8 +52,15 @@ void drawBoard(cell **board, int rows, int cols, FILE *logFile, char argumentX, 
             fprintf(logFile, "%c.", argumentX);
             }
         };
-    printf("\n....................\n");
-    fprintf(logFile, "\n....................\n");
+    //wierz ... po każdym wierszu
+    printf("\n");
+    fprintf(logFile, "\n");
+    for(int i=0; i<cols*2; i++){
+        printf(".");
+        fprintf(logFile, ".");
+    }
+    printf("\n");
+    fprintf(logFile, "\n");
     }
 };
 //pryjęcie nr. wiersza i kolumny, przerwanie gdy spoza zakresu
@@ -77,8 +91,8 @@ int checkInput(int *movesCount, int *inputRow, int *inputCol, FILE *logFile, cel
     fprintf(logFile, "Liczba ruchow: %d\n", *movesCount);
 
 
-    printf("Podaj nr wiersza (1-9): ");
-    fprintf(logFile, "Podaj nr wiersza (1-9): ");
+    printf("Podaj nr wiersza (1-%d): ", rows);
+    fprintf(logFile, "Podaj nr wiersza (1-%d): ", rows);
     scanf("%d", &tmpInputRow);
     fscanf(logFile, "%d", &tmpInputRow);
     if (tmpInputRow < 1 || tmpInputRow > rows) {
@@ -87,8 +101,8 @@ int checkInput(int *movesCount, int *inputRow, int *inputCol, FILE *logFile, cel
         return 0;
     }
 
-    printf("Podaj nr kolumny (1-9): ");
-    fprintf(logFile, "Podaj nr kolumny (1-9): ");
+    printf("Podaj nr kolumny (1-%d): ", cols);
+    fprintf(logFile, "Podaj nr kolumny (1-%d): ", cols);
     scanf("%d", &tmpInputCol);
     fscanf(logFile, "%d", &tmpInputCol);
     if (tmpInputCol < 1 || tmpInputCol > cols) {
