@@ -167,7 +167,7 @@ void gameOver(FILE *logFile){
 // wypisanie komunikatu o przegranej i zamknięcie pliku
 void gameOverCell(FILE *logFile){
     printf("Przekroczono maks. liczbe zmian komorki. KONIEC GRY!\n");
-    fprintf(logFile, "Przekroczono maks. liczbe zmian komorki (%d). KONIEC GRY!\n");
+    fprintf(logFile, "Przekroczono maks. liczbe zmian komorki. KONIEC GRY!\n");
     fclose(logFile);
 }
 
