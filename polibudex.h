@@ -11,10 +11,10 @@ void winnerMessage(int *movesCount, FILE *logFile);
 void startLogFile(FILE **logFile);
 void checkArguments(int argc, char *argv[]);
 void useArguments(int argc, char *argv[], char *symbolX, char *symbolO);
-
+/*
 extern int board[9][9];
 extern int inputRow;
 extern int inputCol;
 extern int movesCount;
-
+*/
 #endif
